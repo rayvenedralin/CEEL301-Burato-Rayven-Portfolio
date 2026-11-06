@@ -406,6 +406,90 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       typography: ['Space Grotesk Bold', 'Inter', 'Fredoka'],
       tools: ['Canva', 'Ibis Paint']
+    },
+
+    'moonboard-1': {
+      id: 'moonboard-1',
+      title: 'Creative Concept Moonboard 01',
+      tagline: 'Visual inspiration, aesthetic direction, and thematic color harmony mood study.',
+      category: 'moonboard',
+      categoryLabel: 'Moonboard',
+      badgeClass: 'bg-yellow',
+      year: '2026',
+      image: 'assets/images/MOODBOARD1.jpg',
+      serviceValue: 'Art Direction & Concept Curation',
+      challenge: 'Develop a cohesive visual moodboard establishing color harmony, texture inspiration, and artistic direction for creative branding and illustration projects.',
+      solution: 'Curated a rich montage of high-contrast visual specimens, tactile textures, and vibrant tone palettes into an engaging visual compass.',
+      deliverables: [
+        'Aesthetic Direction Board',
+        'Color Palette Swatches',
+        'Visual Style Guide Specimen',
+        'Mood Reference Matrix'
+      ],
+      swatches: [
+        { name: 'Acid Lime', hex: '#DAFA01' },
+        { name: 'Sunset Amber', hex: '#F59E0B' },
+        { name: 'Deep Carbon', hex: '#1A1A1A' },
+        { name: 'Clean White', hex: '#FFFFFF' }
+      ],
+      typography: ['Space Grotesk', 'Syne', 'Inter'],
+      tools: ['Canva', 'Ibis Paint', 'Figma']
+    },
+
+    'moonboard-2': {
+      id: 'moonboard-2',
+      title: 'Graphic Identity Moonboard 02',
+      tagline: 'Material exploration, typography specimens, and conceptual graphic layout board.',
+      category: 'moonboard',
+      categoryLabel: 'Moonboard',
+      badgeClass: 'bg-blue',
+      year: '2026',
+      image: 'assets/images/MOODBOARD2.jpg',
+      serviceValue: 'Brand & Graphic Layout Study',
+      challenge: 'Explore typographic balance, layout grids, and material textures to guide modern print and digital brand collateral.',
+      solution: 'Assembled a dynamic grid of typographic specimens, packaging cues, and energetic streetwear elements into a unified reference board.',
+      deliverables: [
+        'Typographic Specimen Board',
+        'Material & Texture Catalog',
+        'Layout Hierarchy Reference',
+        'Brand Identity Moodboard'
+      ],
+      swatches: [
+        { name: 'Electric Cyan', hex: '#06B6D4' },
+        { name: 'Cobalt Blue', hex: '#2563EB' },
+        { name: 'Stark Charcoal', hex: '#111827' },
+        { name: 'Paper Cream', hex: '#F9FAFB' }
+      ],
+      typography: ['Plus Jakarta Sans', 'Space Grotesk', 'Impact'],
+      tools: ['Canva', 'Ibis Paint', 'Figma']
+    },
+
+    'moonboard-3': {
+      id: 'moonboard-3',
+      title: 'Art Direction Moonboard 03',
+      tagline: 'Digital illustration style references, atmospheric visual mood, and character studies.',
+      category: 'moonboard',
+      categoryLabel: 'Moonboard',
+      badgeClass: 'bg-mint',
+      year: '2026',
+      image: 'assets/images/MOODBOARD3.jpg',
+      serviceValue: 'Art Direction & Visual Storytelling',
+      challenge: 'Synthesize diverse illustration styles, lighting atmospheres, and character art into an inspirational reference system for graphic artwork.',
+      solution: 'Structured an artistic visual study highlighting expressive character dynamics, vibrant lighting contrasts, and bold ink line weights.',
+      deliverables: [
+        'Character Art Direction Board',
+        'Lighting & Atmosphere Study',
+        'Illustration Style Reference',
+        'Digital Art Composition Guide'
+      ],
+      swatches: [
+        { name: 'Fresh Mint', hex: '#34D399' },
+        { name: 'Vivid Violet', hex: '#8B5CF6' },
+        { name: 'Obsidian Black', hex: '#1A1A1A' },
+        { name: 'Canvas White', hex: '#FFFFFF' }
+      ],
+      typography: ['Fredoka Bold', 'Space Grotesk', 'Syne'],
+      tools: ['Ibis Paint', 'Canva']
     }
   };
 
@@ -423,7 +507,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'movie-poster-1',
     'movie-poster-2',
     'dp-frames-1',
-    'dp-frames-2'
+    'dp-frames-2',
+    'moonboard-1',
+    'moonboard-2',
+    'moonboard-3'
   ];
   let currentModalProjectId = 'illustration-branding-1';
 
@@ -503,236 +590,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. INTERACTIVE ANIMATED BACKGROUND (CANVAS PARTICLES & CURSOR SPARKLE TRAIL)
+  // 4. PROMOTIONAL VIDEO SCROLL REVEAL & SMOOTH SCROLL OBSERVER
   // --------------------------------------------------------------------------
-  const canvas = document.getElementById('bg-canvas');
-  const cursorGlow = document.getElementById('cursorGlow');
-  const bgGrid = document.getElementById('bgGrid');
+  const promoVideoContainer = document.getElementById('promoVideoContainer');
+  const promoVideoPlayer = document.getElementById('promoVideoPlayer');
+  const scrollDownToPromo = document.getElementById('scrollDownToPromo');
+  const heroWatchVideoBtn = document.getElementById('heroWatchVideoBtn');
 
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+  function checkPromoInView() {
+    if (!promoVideoContainer) return;
+    const rect = promoVideoContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight * 0.88 && rect.bottom >= 0) {
+      promoVideoContainer.classList.add('in-view');
+    }
+  }
 
-    let mouseX = width / 2;
-    let mouseY = height / 2;
-    let targetMouseX = width / 2;
-    let targetMouseY = height / 2;
-
-    // Interactive cursor sparks
-    const trailSparks = [];
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }, { passive: true });
-
-    window.addEventListener('mousemove', (e) => {
-      targetMouseX = e.clientX;
-      targetMouseY = e.clientY;
-
-      if (cursorGlow) {
-        cursorGlow.style.opacity = '1';
-        cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      }
-
-      // Spawn interactive sparks on cursor movement
-      for (let s = 0; s < 2; s++) {
-        trailSparks.push({
-          x: e.clientX + (Math.random() - 0.5) * 16,
-          y: e.clientY + (Math.random() - 0.5) * 16,
-          vx: (Math.random() - 0.5) * 3,
-          vy: (Math.random() - 0.5) * 3 - 1,
-          size: Math.random() * 8 + 6,
-          color: ['#FFEA00', '#38BDF8', '#F43F5E', '#A3E635', '#1A1A1A'][Math.floor(Math.random() * 5)],
-          life: 1,
-          decay: Math.random() * 0.03 + 0.02,
-          shape: Math.random() > 0.5 ? 'spark' : 'circle'
+  if (promoVideoContainer) {
+    if ('IntersectionObserver' in window) {
+      const promoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            promoVideoContainer.classList.add('in-view');
+          }
         });
-      }
-      if (trailSparks.length > 50) trailSparks.shift();
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => {
-      if (cursorGlow) cursorGlow.style.opacity = '0';
-    });
-
-    // 40+ Chunky Floating Neo-Brutalist Badges/Shapes
-    const colors = [
-      { fill: '#FFEA00', stroke: '#1A1A1A' }, // Yellow with black border
-      { fill: '#38BDF8', stroke: '#1A1A1A' }, // Cyan with black border
-      { fill: '#F43F5E', stroke: '#1A1A1A' }, // Pink with black border
-      { fill: '#A3E635', stroke: '#1A1A1A' }, // Lime with black border
-      { fill: '#FFFFFF', stroke: '#1A1A1A' }, // White with black border
-      { fill: '#1A1A1A', stroke: '#1A1A1A' }  // Solid black
-    ];
-
-    const glyphs = ['star', 'plus', 'square', 'circle', 'cross'];
-    const particleCount = Math.min(48, Math.max(26, Math.floor(window.innerWidth / 32)));
-    const particles = [];
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        baseX: Math.random() * width,
-        baseY: Math.random() * height,
-        x: 0,
-        y: 0,
-        size: Math.random() * 14 + 14,
-        glyph: glyphs[Math.floor(Math.random() * glyphs.length)],
-        colorTheme: colors[Math.floor(Math.random() * colors.length)],
-        angle: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.03,
-        floatOffset: Math.random() * Math.PI * 2,
-        depth: Math.random() * 0.05 + 0.02
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
       });
+      promoObserver.observe(promoVideoContainer);
     }
+    window.addEventListener('scroll', checkPromoInView, { passive: true });
+    setTimeout(checkPromoInView, 350);
+  }
 
-    function drawGlyph(ctx, p) {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.angle);
-
-      ctx.fillStyle = p.colorTheme.fill;
-      ctx.strokeStyle = p.colorTheme.stroke;
-      ctx.lineWidth = 2.5;
-
-      const s = p.size;
-      const hs = s / 2;
-
-      ctx.shadowColor = '#1A1A1A';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetX = 2.5;
-      ctx.shadowOffsetY = 2.5;
-
-      switch (p.glyph) {
-        case 'plus':
-          ctx.beginPath();
-          const t = hs * 0.35;
-          ctx.rect(-hs, -t, s, t * 2);
-          ctx.rect(-t, -hs, t * 2, s);
-          ctx.fill();
-          ctx.stroke();
-          break;
-        case 'cross':
-          ctx.beginPath();
-          ctx.lineWidth = 3.5;
-          ctx.moveTo(-hs * 0.8, -hs * 0.8); ctx.lineTo(hs * 0.8, hs * 0.8);
-          ctx.moveTo(hs * 0.8, -hs * 0.8); ctx.lineTo(-hs * 0.8, hs * 0.8);
-          ctx.stroke();
-          break;
-        case 'star':
-          ctx.beginPath();
-          ctx.moveTo(0, -hs * 1.3);
-          ctx.quadraticCurveTo(0, 0, hs * 1.3, 0);
-          ctx.quadraticCurveTo(0, 0, 0, hs * 1.3);
-          ctx.quadraticCurveTo(0, 0, -hs * 1.3, 0);
-          ctx.quadraticCurveTo(0, 0, 0, -hs * 1.3);
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
-          break;
-        case 'square':
-          ctx.beginPath();
-          ctx.rect(-hs * 0.75, -hs * 0.75, s * 0.75, s * 0.75);
-          ctx.fill();
-          ctx.stroke();
-          break;
-        case 'circle':
-          ctx.beginPath();
-          ctx.arc(0, 0, hs * 0.7, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-          break;
-      }
-      ctx.restore();
+  function scrollToPromoVideo(e) {
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+    const promoSection = document.getElementById('promoVideo');
+    if (promoSection) {
+      promoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        if (promoVideoContainer) {
+          promoVideoContainer.classList.add('in-view');
+        }
+      }, 450);
     }
+  }
 
-    let time = 0;
-    function animateBackground() {
-      mouseX += (targetMouseX - mouseX) * 0.08;
-      mouseY += (targetMouseY - mouseY) * 0.08;
-
-      if (bgGrid) {
-        const gridX = (mouseX - width / 2) * 0.03;
-        const gridY = (mouseY - height / 2) * 0.03;
-        bgGrid.style.backgroundPosition = `${gridX}px ${gridY}px`;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-      time += 0.018;
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.angle += p.rotSpeed;
-
-        const floatX = Math.sin(time * 0.8 + p.floatOffset) * 16;
-        const floatY = Math.cos(time * 0.8 + p.floatOffset) * 16;
-
-        const parallaxX = (mouseX - centerX) * p.depth * 40;
-        const parallaxY = (mouseY - centerY) * p.depth * 40;
-
-        const curX = p.baseX + floatX + parallaxX;
-        const curY = p.baseY + floatY + parallaxY;
-        const dx = curX - mouseX;
-        const dy = curY - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        let repelX = 0;
-        let repelY = 0;
-        if (dist < 150 && dist > 0) {
-          const force = (1 - dist / 150) * 36;
-          repelX = (dx / dist) * force;
-          repelY = (dy / dist) * force;
-        }
-
-        p.x = curX + repelX;
-        p.y = curY + repelY;
-
-        drawGlyph(ctx, p);
-      }
-
-      for (let j = trailSparks.length - 1; j >= 0; j--) {
-        const s = trailSparks[j];
-        s.x += s.vx;
-        s.y += s.vy;
-        s.life -= s.decay;
-
-        if (s.life <= 0) {
-          trailSparks.splice(j, 1);
-          continue;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = s.life;
-        ctx.fillStyle = s.color;
-        ctx.strokeStyle = '#1A1A1A';
-        ctx.lineWidth = 1.5;
-
-        if (s.shape === 'spark') {
-          const r = s.size * s.life;
-          ctx.beginPath();
-          ctx.moveTo(s.x, s.y - r);
-          ctx.quadraticCurveTo(s.x, s.y, s.x + r, s.y);
-          ctx.quadraticCurveTo(s.x, s.y, s.x, s.y + r);
-          ctx.quadraticCurveTo(s.x, s.y, s.x - r, s.y);
-          ctx.quadraticCurveTo(s.x, s.y, s.x, s.y - r);
-          ctx.fill();
-          ctx.stroke();
-        } else {
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, (s.size / 2) * s.life, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      requestAnimationFrame(animateBackground);
-    }
-    requestAnimationFrame(animateBackground);
+  if (scrollDownToPromo) {
+    scrollDownToPromo.addEventListener('click', scrollToPromoVideo);
+  }
+  if (heroWatchVideoBtn) {
+    heroWatchVideoBtn.addEventListener('click', scrollToPromoVideo);
   }
 
   // --------------------------------------------------------------------------
@@ -803,6 +712,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!href || href === '#') return;
 
     const targetId = href.substring(1);
+
+    if (targetId === 'promoVideo') {
+      e.preventDefault();
+      const currentActive = sessionStorage.getItem('portfolio_active_section') || 'home';
+      if (currentActive !== 'home') {
+        showPage('home');
+      }
+      setTimeout(() => {
+        scrollToPromoVideo();
+      }, 60);
+      if (typeof closeMobileDrawer === 'function') {
+        closeMobileDrawer();
+      }
+      return;
+    }
+
     if (sectionIds.includes(targetId)) {
       e.preventDefault();
       showPage(targetId);

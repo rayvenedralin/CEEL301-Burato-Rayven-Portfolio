@@ -33,15 +33,13 @@
     href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=20261106_v3">
+  <link rel="stylesheet" href="style.css?v=20261107_v5">
 </head>
 
 <body>
 
-  <!-- Interactive Animated Background Canvas & Grid Overlay -->
-  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
-  <div class="bg-grid-overlay" id="bgGrid" aria-hidden="true"></div>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <!-- Background Grid Pattern -->
+  <div class="bg-grid-overlay" aria-hidden="true"></div>
 
   <!-- FIXED/STICKY HEADER NAVIGATION -->
   <header class="site-header" id="header">
@@ -138,6 +136,9 @@
             <a href="#work" class="btn btn-lg btn-yellow btn-hero-primary" aria-label="View My Work">
               <span>View My Work</span>
             </a>
+            <a href="#promoVideo" class="btn btn-lg btn-white btn-hero-secondary" id="heroWatchVideoBtn" aria-label="Watch Promotional Video">
+              <span>Watch Promo Video 🎬</span>
+            </a>
           </div>
         </div>
 
@@ -150,6 +151,61 @@
             </div>
             <div class="hero-profile-pill">
               <span>Hello, I am Rayven E. Burato, an Aspiring Graphic Artist!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Prompt -->
+      <div class="hero-scroll-prompt">
+        <a href="#promoVideo" class="scroll-down-pill" id="scrollDownToPromo">
+          <span>Scroll For Promotional Video</span>
+          <span class="scroll-arrow">↓</span>
+        </a>
+      </div>
+
+      <!-- PROMOTIONAL VIDEO SHOWCASE (Reveals on Scroll) -->
+      <div class="home-promo-section" id="promoVideo">
+        <div class="promo-header text-center">
+          <div class="section-badge bg-yellow">🎬 Official Promo Video</div>
+          <h2 class="section-title">
+            Creative <span class="highlight-yellow highlighter-stroke">Showreel &amp; Journey</span>
+          </h2>
+          <p class="section-subtitle">
+            A dynamic visual showcase of creative projects, brand systems, and graphic storytelling by Rayven E. Burato.
+          </p>
+        </div>
+
+        <div class="promo-video-container" id="promoVideoContainer">
+          <div class="promo-video-card">
+            <div class="video-card-top-bar">
+              <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="video-title-bar">3CS5_Burato_Rayven_PromoVideo.mp4</span>
+              <span class="video-badge-pill">HD 1080p</span>
+            </div>
+            <div class="video-media-box">
+              <video 
+                id="promoVideoPlayer"
+                class="promo-video-player"
+                src="assets/images/3CS5_Burato_Rayven_PromoVideo.mp4" 
+                controls 
+                preload="metadata"
+                playsinline>
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="video-card-bottom-bar">
+              <div class="video-meta-tag">
+                <span class="pulse-dot"></span>
+                <span>Rayven E. Burato • Promotional Video</span>
+              </div>
+              <a href="#work" class="btn btn-sm btn-yellow">
+                Explore Projects ↗
+              </a>
             </div>
           </div>
         </div>
@@ -177,7 +233,7 @@
         <div class="filter-bar" role="tablist" aria-label="Project Categories">
           <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
             <span>All Work</span>
-            <span class="filter-count" id="count-all">14</span>
+            <span class="filter-count" id="count-all">17</span>
           </button>
           <button type="button" class="filter-btn" data-filter="illustration-branding" role="tab" aria-selected="false">
             <span>Illustration/Branding</span>
@@ -202,6 +258,10 @@
           <button type="button" class="filter-btn" data-filter="dp-frames" role="tab" aria-selected="false">
             <span>DP Frames</span>
             <span class="filter-count" id="count-dp-frames">2</span>
+          </button>
+          <button type="button" class="filter-btn" data-filter="moonboard" role="tab" aria-selected="false">
+            <span>Moonboard</span>
+            <span class="filter-count" id="count-moonboard">3</span>
           </button>
         </div>
 
@@ -564,7 +624,7 @@
             </div>
           </article>
 
-          <!-- 15. DP FRAMES 2 -->
+          <!-- 14. DP FRAMES 2 -->
           <article class="project-card" data-category="dp-frames" data-id="dp-frames-2">
             <div class="card-media-wrapper">
               <img src="assets/images/DP FRAMES 2.jpg" alt="Arts Month DP Blast Frame" class="card-thumb-img"
@@ -587,6 +647,87 @@
                 <span class="tag-pill">DP Frame</span>
                 <span class="tag-pill">CCC Dibujo</span>
                 <span class="tag-pill">Arts Month</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 15. MOONBOARD 1 -->
+          <article class="project-card" data-category="moonboard" data-id="moonboard-1">
+            <div class="card-media-wrapper">
+              <img src="assets/images/MOODBOARD1.jpg" alt="Creative Concept Moonboard 01" class="card-thumb-img"
+                loading="lazy">
+              <span class="card-badge bg-yellow">Moonboard</span>
+              <button type="button" class="quick-view-btn" aria-label="View Creative Concept Moonboard 01 details">
+                <span>View Project ↗</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="meta-tag">Concept Curation</span>
+                <span class="meta-year">2026</span>
+              </div>
+              <h3 class="card-title">Creative Concept Moonboard 01</h3>
+              <p class="card-desc">
+                Visual inspiration, aesthetic direction, and thematic color harmony mood study.
+              </p>
+              <div class="card-tags">
+                <span class="tag-pill">Moonboard</span>
+                <span class="tag-pill">Aesthetic</span>
+                <span class="tag-pill">Color Harmony</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 16. MOONBOARD 2 -->
+          <article class="project-card" data-category="moonboard" data-id="moonboard-2">
+            <div class="card-media-wrapper">
+              <img src="assets/images/MOODBOARD2.jpg" alt="Graphic Identity Moonboard 02" class="card-thumb-img"
+                loading="lazy">
+              <span class="card-badge bg-blue">Moonboard</span>
+              <button type="button" class="quick-view-btn" aria-label="View Graphic Identity Moonboard 02 details">
+                <span>View Project ↗</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="meta-tag">Brand &amp; Texture Study</span>
+                <span class="meta-year">2026</span>
+              </div>
+              <h3 class="card-title">Graphic Identity Moonboard 02</h3>
+              <p class="card-desc">
+                Material exploration, typography specimens, and conceptual graphic layout board.
+              </p>
+              <div class="card-tags">
+                <span class="tag-pill">Moonboard</span>
+                <span class="tag-pill">Brand Identity</span>
+                <span class="tag-pill">Textures</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 17. MOONBOARD 3 -->
+          <article class="project-card" data-category="moonboard" data-id="moonboard-3">
+            <div class="card-media-wrapper">
+              <img src="assets/images/MOODBOARD3.jpg" alt="Art Direction Moonboard 03" class="card-thumb-img"
+                loading="lazy">
+              <span class="card-badge bg-mint">Moonboard</span>
+              <button type="button" class="quick-view-btn" aria-label="View Art Direction Moonboard 03 details">
+                <span>View Project ↗</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="meta-tag">Illustration Reference</span>
+                <span class="meta-year">2026</span>
+              </div>
+              <h3 class="card-title">Art Direction Moonboard 03</h3>
+              <p class="card-desc">
+                Digital illustration style references, atmospheric visual mood, and character studies.
+              </p>
+              <div class="card-tags">
+                <span class="tag-pill">Moonboard</span>
+                <span class="tag-pill">Art Direction</span>
+                <span class="tag-pill">Illustration</span>
               </div>
             </div>
           </article>
@@ -1390,70 +1531,35 @@
 
 
   <!-- ==============================================
-       FOOTER
+       FOOTER (Sleek Minimal Neo-Brutalist Bar)
   =============================================== -->
   <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-top-row">
-        <!-- Logo & Mission -->
-        <div class="footer-brand">
-          <a href="#home" class="brand-logo" aria-label="Rayven Graphic Artist Home">
-            <div class="logo-badge-caps">
-              <span>Rayven</span>
-            </div>
-          </a>
-          <p class="footer-tagline">
-            Bold, vibrant, and unapologetically playful design engineered to leave an indelible mark.
-          </p>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="footer-nav-col">
-          <h4 class="footer-heading">Navigate</h4>
-          <ul class="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#work">Featured Work</a></li>
-            <li><a href="#about">About the Artist</a></li>
-            <li><a href="#services">Services &amp; Process</a></li>
-            <li><a href="#certificates">Certificates</a></li>
-            <li><a href="#contact">Get in Touch</a></li>
-          </ul>
-        </div>
-
-        <!-- Services Links -->
-        <div class="footer-nav-col">
-          <h4 class="footer-heading">Capabilities</h4>
-          <ul class="footer-links">
-            <li><a href="#services">Brand Identity</a></li>
-            <li><a href="#services">Custom Illustration</a></li>
-            <li><a href="#services">Packaging Dielines</a></li>
-            <li><a href="#services">Merchandise &amp; Apparel</a></li>
-            <li><a href="#services">Social &amp; Marketing Kits</a></li>
-          </ul>
-        </div>
-
-        <!-- Fun Interactive Stamp Box -->
-        <div class="footer-stamp-col">
-          <h4 class="footer-heading">Artist Stamp of Quality</h4>
-          <div class="quality-stamp-card">
-            <div class="stamp-circle">
-              <span class="stamp-star">✦</span>
-              <span class="stamp-text">100% VECTOR CERTIFIED</span>
-            </div>
-            <p class="stamp-note">Crafted with caffeine, vector nodes, and passion.</p>
+    <div class="container footer-container-simple">
+      <div class="footer-simple-brand">
+        <a href="#home" class="brand-logo-mini" aria-label="Rayven Graphic Artist Home">
+          <div class="logo-badge-caps-mini">
+            <span>Rayven</span>
           </div>
+        </a>
+        <span class="footer-tagline-simple">Aspiring Graphic Artist • Brand Identity &amp; Digital Illustration</span>
+      </div>
+
+      <div class="footer-simple-badge">
+        <div class="stamp-pill">
+          <span class="stamp-star">✦</span>
+          <span>100% VECTOR CERTIFIED</span>
         </div>
       </div>
 
-      <div class="footer-bottom-row">
+      <div class="footer-simple-copyright">
         <p class="copyright-text">
-          &copy; <span id="currentYear">2026</span> <strong>Rayven</strong>. All Rights Reserved.
+          &copy; <span id="currentYear">2026</span> <strong>Rayven E. Burato</strong>. All Rights Reserved.
         </p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js?v=20261106_v3"></script>
+  <script src="script.js?v=20261107_v5"></script>
 </body>
 
 </html>
