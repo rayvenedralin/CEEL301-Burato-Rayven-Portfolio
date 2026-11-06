@@ -35,8 +35,10 @@
 
 <body>
 
-  <!-- Background Grid Pattern -->
-  <div class="bg-grid-overlay" aria-hidden="true"></div>
+  <!-- Interactive Animated Background Canvas & Grid Overlay -->
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-grid-overlay" id="bgGrid" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <!-- FIXED/STICKY HEADER NAVIGATION -->
   <header class="site-header" id="header">
@@ -113,7 +115,7 @@
     <!-- ==============================================
          1. HERO SECTION (#home)
     =============================================== -->
-    <section class="section hero-section" id="home">
+    <section class="section hero-section active-page" id="home">
       <div class="container hero-container">
         <!-- Hero Left Column: Copy & CTAs -->
         <div class="hero-content">
@@ -172,7 +174,7 @@
         <div class="filter-bar" role="tablist" aria-label="Project Categories">
           <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
             <span>All Work</span>
-            <span class="filter-count" id="count-all">16</span>
+            <span class="filter-count" id="count-all">14</span>
           </button>
           <button type="button" class="filter-btn" data-filter="illustration-branding" role="tab" aria-selected="false">
             <span>Illustration/Branding</span>
@@ -180,11 +182,11 @@
           </button>
           <button type="button" class="filter-btn" data-filter="social-media" role="tab" aria-selected="false">
             <span>Social Media</span>
-            <span class="filter-count" id="count-social-media">6</span>
+            <span class="filter-count" id="count-social-media">5</span>
           </button>
           <button type="button" class="filter-btn" data-filter="landing-page" role="tab" aria-selected="false">
             <span>Landing Page</span>
-            <span class="filter-count" id="count-landing-page">2</span>
+            <span class="filter-count" id="count-landing-page">1</span>
           </button>
           <button type="button" class="filter-btn" data-filter="magazine" role="tab" aria-selected="false">
             <span>Magazine</span>
@@ -394,34 +396,7 @@
             </div>
           </article>
 
-          <!-- 8. SOCIAL MEDIA 6 -->
-          <article class="project-card" data-category="social-media" data-id="social-media-6">
-            <div class="card-media-wrapper">
-              <img src="assets/images/SOCIAL MEDIA GRAPHICS 6.jpg" alt="CCC Dibujo Creatives General Assembly Pubmat"
-                class="card-thumb-img" loading="lazy">
-              <span class="card-badge bg-blue">Social Media</span>
-              <button type="button" class="quick-view-btn" aria-label="View CCC Dibujo General Assembly Pubmat details">
-                <span>View Project ↗</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="meta-tag">CCC Dibujo Announcement</span>
-                <span class="meta-year">2026</span>
-              </div>
-              <h3 class="card-title">CCC Dibujo General Assembly Pubmat</h3>
-              <p class="card-desc">
-                Pubmat announcement for CCC Dibujo Creatives General Assembly.
-              </p>
-              <div class="card-tags">
-                <span class="tag-pill">Social Media</span>
-                <span class="tag-pill">CCC Dibujo</span>
-                <span class="tag-pill">Pubmat</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- 9. LANDING PAGE 1 -->
+          <!-- 8. LANDING PAGE 1 -->
           <article class="project-card" data-category="landing-page" data-id="landing-page-1">
             <div class="card-media-wrapper">
               <img src="assets/images/LANDING PAGE 1.jpg" alt="Tech/Week 2026 Digital Web Banner" class="card-thumb-img"
@@ -448,35 +423,7 @@
             </div>
           </article>
 
-          <!-- 10. LANDING PAGE 2 -->
-          <article class="project-card" data-category="landing-page" data-id="landing-page-2">
-            <div class="card-media-wrapper">
-              <img src="assets/images/LANDING PAGE 2.jpg" alt="CCC Dibujo Creatives General Assembly Landing Page"
-                class="card-thumb-img" loading="lazy">
-              <span class="card-badge bg-mint">Landing Page</span>
-              <button type="button" class="quick-view-btn"
-                aria-label="View CCC Dibujo Creatives General Assembly details">
-                <span>View Project ↗</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="meta-tag">Event Landing Screen</span>
-                <span class="meta-year">2026</span>
-              </div>
-              <h3 class="card-title">CCC Dibujo Creatives General Assembly Landing Page</h3>
-              <p class="card-desc">
-                Digital landing page screen and stage backdrop for CCC Dibujo Creatives General Assembly.
-              </p>
-              <div class="card-tags">
-                <span class="tag-pill">Landing Page</span>
-                <span class="tag-pill">Event Branding</span>
-                <span class="tag-pill">3D Lettering</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- 10. MAGAZINE 1 (WITH CONNECTED SPREADS) -->
+          <!-- 9. MAGAZINE 1 (WITH CONNECTED SPREADS) -->
           <article class="project-card" data-category="magazine" data-id="magazine-1">
             <div class="card-media-wrapper">
               <img src="assets/images/MAGAZINE 1.jpg" alt="This Is Rayven — Editorial Magazine Issue"
@@ -1465,6 +1412,7 @@
             <li><a href="#work">Featured Work</a></li>
             <li><a href="#about">About the Artist</a></li>
             <li><a href="#services">Services &amp; Process</a></li>
+            <li><a href="#certificates">Certificates</a></li>
             <li><a href="#contact">Get in Touch</a></li>
           </ul>
         </div>

@@ -205,34 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: ['Canva', 'Figma', 'Ibis Paint']
     },
 
-    'social-media-6': {
-      id: 'social-media-6',
-      title: 'CCC Dibujo General Assembly Pubmat',
-      tagline: 'Pubmat announcement for CCC Dibujo Creatives General Assembly.',
-      category: 'social-media',
-      categoryLabel: 'Social Media',
-      badgeClass: 'bg-blue',
-      year: '2026',
-      image: 'assets/images/SOCIAL MEDIA GRAPHICS 6.jpg',
-      serviceValue: 'Social Media & Marketing Assets',
-      challenge: 'Design an official social media announcement publication material for the CCC Dibujo Creatives General Assembly.',
-      solution: 'Pubmat announcement for CCC Dibujo Creatives General Assembly.',
-      deliverables: [
-        'Official Social Media Pubmat (4:5)',
-        'Event Program & Details Layout',
-        'Announcement Post Assets',
-        'Social Media Feed Graphics'
-      ],
-      swatches: [
-        { name: 'Assembly Blue', hex: '#2563EB' },
-        { name: 'Sunshine Gold', hex: '#FACC15' },
-        { name: 'Navy Slate', hex: '#0F172A' },
-        { name: 'Pure White', hex: '#FFFFFF' }
-      ],
-      typography: ['Space Grotesk Bold', 'Inter', 'Fredoka'],
-      tools: ['Canva']
-    },
-
     'landing-page-1': {
       id: 'landing-page-1',
       title: 'Tech/Week 2026 Digital Web Banner',
@@ -259,34 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       typography: ['Pixel 8-Bit Display', 'Space Grotesk', 'Plus Jakarta Sans'],
       tools: ['Canva', 'Figma', 'Ibis Paint']
-    },
-
-    'landing-page-2': {
-      id: 'landing-page-2',
-      title: 'CCC Dibujo Creatives General Assembly Landing Page',
-      tagline: 'Digital landing page screen and stage backdrop for CCC Dibujo Creatives General Assembly.',
-      category: 'landing-page',
-      categoryLabel: 'Landing Page',
-      badgeClass: 'bg-mint',
-      year: '2026',
-      image: 'assets/images/LANDING PAGE 2.jpg',
-      serviceValue: 'Digital & UI/UX Design',
-      challenge: 'Design a digital landing page and LED stage screen for CCC Dibujo Creatives General Assembly.',
-      solution: 'Crafted a welcoming digital landing page and LED stage screen for CCC Dibujo Creatives General Assembly featuring tactile 3D bubble typography and cozy wooden aesthetics.',
-      deliverables: [
-        '16:9 Digital Landing Screen & Stage Backdrop',
-        '3D Beveled Bubble Lettering Mark',
-        'Event Lower-Thirds & Digital Placards',
-        'Social Livestream Frame Overlay'
-      ],
-      swatches: [
-        { name: 'Assembly Blue', hex: '#2563EB' },
-        { name: 'Warm Timber', hex: '#78350F' },
-        { name: 'Botanical Green', hex: '#15803D' },
-        { name: 'Cream Accent', hex: '#FEF3C7' }
-      ],
-      typography: ['Custom 3D Bubble Sans', 'Space Grotesk Bold', 'Inter'],
-      tools: ['Canva']
     },
 
     'magazine-1': {
@@ -473,9 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'social-media-3',
     'social-media-4',
     'social-media-5',
-    'social-media-6',
     'landing-page-1',
-    'landing-page-2',
     'magazine-1',
     'magazine-2',
     'movie-poster-1',
@@ -561,7 +503,167 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. STICKY HEADER & SMOOTH SCROLL OBSERVER
+  // 4. INTERACTIVE ANIMATED BACKGROUND (CANVAS GLYPHS & CURSOR PARALLAX)
+  // --------------------------------------------------------------------------
+  const canvas = document.getElementById('bg-canvas');
+  const cursorGlow = document.getElementById('cursorGlow');
+  const bgGrid = document.getElementById('bgGrid');
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let mouseX = width / 2;
+    let mouseY = height / 2;
+    let targetMouseX = width / 2;
+    let targetMouseY = height / 2;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = e.clientX;
+      targetMouseY = e.clientY;
+      if (cursorGlow) {
+        cursorGlow.style.opacity = '1';
+        cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      if (cursorGlow) cursorGlow.style.opacity = '0';
+    });
+
+    const colors = [
+      '#FFEA00', // Sunshine yellow
+      '#38BDF8', // Cyber cyan
+      '#F43F5E', // Neo pink
+      '#A3E635', // Lime toxic
+      'rgba(26, 26, 26, 0.4)' // Deep charcoal
+    ];
+
+    const glyphs = ['star', 'plus', 'square', 'circle', 'cross'];
+    const particleCount = Math.min(32, Math.max(16, Math.floor(window.innerWidth / 40)));
+    const particles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        baseX: Math.random() * width,
+        baseY: Math.random() * height,
+        x: 0,
+        y: 0,
+        size: Math.random() * 10 + 9,
+        glyph: glyphs[Math.floor(Math.random() * glyphs.length)],
+        color: colors[Math.floor(Math.random() * colors.length)],
+        angle: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.02,
+        floatOffset: Math.random() * Math.PI * 2,
+        depth: Math.random() * 0.04 + 0.015
+      });
+    }
+
+    function drawGlyph(ctx, p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = 2.5;
+
+      const s = p.size;
+      const hs = s / 2;
+
+      switch (p.glyph) {
+        case 'plus':
+          ctx.beginPath();
+          ctx.moveTo(-hs, 0); ctx.lineTo(hs, 0);
+          ctx.moveTo(0, -hs); ctx.lineTo(0, hs);
+          ctx.stroke();
+          break;
+        case 'cross':
+          ctx.beginPath();
+          ctx.moveTo(-hs * 0.7, -hs * 0.7); ctx.lineTo(hs * 0.7, hs * 0.7);
+          ctx.moveTo(hs * 0.7, -hs * 0.7); ctx.lineTo(-hs * 0.7, hs * 0.7);
+          ctx.stroke();
+          break;
+        case 'star':
+          ctx.beginPath();
+          ctx.moveTo(0, -hs * 1.3);
+          ctx.quadraticCurveTo(0, 0, hs * 1.3, 0);
+          ctx.quadraticCurveTo(0, 0, 0, hs * 1.3);
+          ctx.quadraticCurveTo(0, 0, -hs * 1.3, 0);
+          ctx.quadraticCurveTo(0, 0, 0, -hs * 1.3);
+          ctx.fill();
+          break;
+        case 'square':
+          ctx.strokeRect(-hs * 0.7, -hs * 0.7, s * 0.7, s * 0.7);
+          break;
+        case 'circle':
+          ctx.beginPath();
+          ctx.arc(0, 0, hs * 0.6, 0, Math.PI * 2);
+          ctx.stroke();
+          break;
+      }
+      ctx.restore();
+    }
+
+    let time = 0;
+    function animateBackground() {
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+
+      if (bgGrid) {
+        const gridX = (mouseX - width / 2) * 0.02;
+        const gridY = (mouseY - height / 2) * 0.02;
+        bgGrid.style.backgroundPosition = `${gridX}px ${gridY}px`;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+      time += 0.015;
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.angle += p.rotSpeed;
+
+        const floatX = Math.sin(time * 0.8 + p.floatOffset) * 12;
+        const floatY = Math.cos(time * 0.8 + p.floatOffset) * 12;
+
+        const parallaxX = (mouseX - centerX) * p.depth * 35;
+        const parallaxY = (mouseY - centerY) * p.depth * 35;
+
+        const curX = p.baseX + floatX + parallaxX;
+        const curY = p.baseY + floatY + parallaxY;
+        const dx = curX - mouseX;
+        const dy = curY - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        let repelX = 0;
+        let repelY = 0;
+        if (dist < 130 && dist > 0) {
+          const force = (1 - dist / 130) * 26;
+          repelX = (dx / dist) * force;
+          repelY = (dy / dist) * force;
+        }
+
+        p.x = curX + repelX;
+        p.y = curY + repelY;
+
+        drawGlyph(ctx, p);
+      }
+
+      requestAnimationFrame(animateBackground);
+    }
+    requestAnimationFrame(animateBackground);
+  }
+
+  // --------------------------------------------------------------------------
+  // 5. PAGE SEPARATION ARCHITECTURE (TABBED SPA VIEWS - DO NOT SCROLL ACROSS PAGES)
   // --------------------------------------------------------------------------
   const header = document.getElementById('header');
   const navPills = document.querySelectorAll('.nav-pill');
@@ -570,190 +672,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setActiveNavSection(id) {
     navPills.forEach(pill => {
-      if (pill.getAttribute('data-section') === id) {
-        pill.classList.add('active');
-      } else {
-        pill.classList.remove('active');
-      }
+      const match = pill.getAttribute('data-section') === id;
+      pill.classList.toggle('active', match);
+      pill.setAttribute('aria-selected', match ? 'true' : 'false');
     });
 
     mobileNavLinks.forEach(link => {
-      if (link.getAttribute('data-section') === id) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
+      const match = link.getAttribute('data-section') === id;
+      link.classList.toggle('active', match);
     });
   }
 
-  function handleScrollNavigation() {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.documentElement.scrollHeight;
-
-    // Header shadow on scroll
-    if (header) {
-      if (scrollY > 30) {
-        header.style.boxShadow = '0 4px 0px #1A1A1A';
-      } else {
-        header.style.boxShadow = 'none';
-      }
+  function showPage(pageId, updateHistory = true) {
+    if (!sectionIds.includes(pageId)) {
+      pageId = 'home';
     }
 
-    // Scroll-Spy: Top of page -> Home
-    if (scrollY < 140) {
-      setActiveNavSection('home');
-      return;
-    }
-
-    // Bottom of page -> Contact
-    if (windowHeight + scrollY >= docHeight - 90) {
-      setActiveNavSection('contact');
-      return;
-    }
-
-    // Check each section in order
-    const headerOffset = (header ? header.offsetHeight : 70) + 60;
-    let currentSection = 'home';
-
-    for (let i = 0; i < sectionIds.length; i++) {
-      const sectionEl = document.getElementById(sectionIds[i]);
-      if (sectionEl) {
-        const rect = sectionEl.getBoundingClientRect();
-        if (rect.top <= headerOffset) {
-          currentSection = sectionIds[i];
+    // Hide all sections, display the active section
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === pageId) {
+          el.classList.add('active-page');
+        } else {
+          el.classList.remove('active-page');
         }
       }
-    }
+    });
 
-    setActiveNavSection(currentSection);
+    // Update active nav indicators
+    setActiveNavSection(pageId);
 
-    if (!isNavClicking && currentSection !== lastSavedSection) {
-      lastSavedSection = currentSection;
-      sessionStorage.setItem('portfolio_active_section', currentSection);
-      if (currentSection === 'home') {
+    // Reset window scroll to top of current active page
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Store in session storage
+    sessionStorage.setItem('portfolio_active_section', pageId);
+
+    // Update browser URL without reloading
+    if (updateHistory) {
+      if (pageId === 'home') {
         history.replaceState(null, null, window.location.pathname + window.location.search);
       } else {
-        history.replaceState(null, null, `#${currentSection}`);
+        history.replaceState(null, null, `#${pageId}`);
       }
     }
+
+    playPopSound(520, 'sine', 0.08);
   }
 
-  let scrollTicking = false;
-  let isNavClicking = false;
-  let lastSavedSection = '';
+  // Intercept all hash clicks for seamless page switching
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
 
-  window.addEventListener('scroll', () => {
-    if (isNavClicking) return;
-    if (!scrollTicking) {
-      window.requestAnimationFrame(() => {
-        handleScrollNavigation();
-        scrollTicking = false;
-      });
-      scrollTicking = true;
-    }
-  }, { passive: true });
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
 
-  // Handle Tab Click Immediately
-  navPills.forEach(pill => {
-    pill.addEventListener('click', (e) => {
-      const sectionId = pill.getAttribute('data-section');
-      if (sectionId) {
-        e.preventDefault();
-        setActiveNavSection(sectionId);
-        isNavClicking = true;
-        lastSavedSection = sectionId;
-        sessionStorage.setItem('portfolio_active_section', sectionId);
-
-        if (sectionId === 'home') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          history.replaceState(null, null, window.location.pathname + window.location.search);
-        } else {
-          const targetEl = document.getElementById(sectionId);
-          if (targetEl) {
-            const headerHeight = header ? header.offsetHeight : 82;
-            const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
-            window.scrollTo({ top: targetPos, behavior: 'smooth' });
-            history.replaceState(null, null, `#${sectionId}`);
-          }
-        }
-
-        setTimeout(() => {
-          isNavClicking = false;
-        }, 850);
-      }
-    });
-  });
-
-  // Brand Logo click -> Home tab
-  document.querySelectorAll('.brand-logo').forEach(link => {
-    link.addEventListener('click', (e) => {
+    const targetId = href.substring(1);
+    if (sectionIds.includes(targetId)) {
       e.preventDefault();
-      setActiveNavSection('home');
-      lastSavedSection = 'home';
-      sessionStorage.setItem('portfolio_active_section', 'home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      history.replaceState(null, null, window.location.pathname + window.location.search);
-    });
+      showPage(targetId);
+
+      if (typeof closeMobileDrawer === 'function') {
+        closeMobileDrawer();
+      }
+    }
   });
-
-  // Restore section on page load / refresh
-  function restoreSectionOnLoad() {
-    let targetSection = '';
-    const hash = window.location.hash ? window.location.hash.substring(1) : '';
-    if (hash && sectionIds.includes(hash)) {
-      targetSection = hash;
-    } else {
-      const saved = sessionStorage.getItem('portfolio_active_section');
-      if (saved && sectionIds.includes(saved)) {
-        targetSection = saved;
-      }
-    }
-
-    if (targetSection && targetSection !== 'home') {
-      const targetEl = document.getElementById(targetSection);
-      if (targetEl) {
-        setActiveNavSection(targetSection);
-        isNavClicking = true;
-        lastSavedSection = targetSection;
-
-        // Perform instant scroll to target section with header offset
-        const scrollToTarget = () => {
-          const headerHeight = header ? header.offsetHeight : 82;
-          const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
-          window.scrollTo({ top: targetPos, behavior: 'instant' });
-          setActiveNavSection(targetSection);
-          setTimeout(() => {
-            isNavClicking = false;
-          }, 300);
-        };
-
-        // Scroll immediately and once again after render
-        scrollToTarget();
-        setTimeout(scrollToTarget, 100);
-        return;
-      }
-    }
-
-    handleScrollNavigation();
-  }
-
-  // Run restoration on load
-  restoreSectionOnLoad();
 
   // Handle browser back/forward buttons
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash ? window.location.hash.substring(1) : 'home';
     if (sectionIds.includes(hash)) {
-      setActiveNavSection(hash);
-      const targetEl = document.getElementById(hash);
-      if (targetEl) {
-        const headerHeight = header ? header.offsetHeight : 82;
-        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
-        window.scrollTo({ top: targetPos, behavior: 'smooth' });
-      }
+      showPage(hash, false);
     }
   });
+
+  // Restore active page on page load / refresh
+  function restorePageOnLoad() {
+    let target = 'home';
+    const hash = window.location.hash ? window.location.hash.substring(1) : '';
+    if (hash && sectionIds.includes(hash)) {
+      target = hash;
+    } else {
+      const saved = sessionStorage.getItem('portfolio_active_section');
+      if (saved && sectionIds.includes(saved)) {
+        target = saved;
+      }
+    }
+    showPage(target, false);
+  }
+
+  restorePageOnLoad();
 
   // --------------------------------------------------------------------------
   // 5. MOBILE DRAWER NAVIGATION
