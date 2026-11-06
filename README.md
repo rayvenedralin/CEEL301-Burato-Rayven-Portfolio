@@ -77,3 +77,4 @@ GD PORTFOLIO/
 * **Student / Artist:** Rayven E. Burato
 * **Course / Subject:** CEEL301
 * **GitHub:** [@rayvenedralin](https://github.com/rayvenedralin)
+
