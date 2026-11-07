@@ -408,12 +408,12 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: ['Canva', 'Ibis Paint']
     },
 
-    'moonboard-1': {
-      id: 'moonboard-1',
-      title: 'Creative Concept Moonboard 01',
+    'moodboard-1': {
+      id: 'moodboard-1',
+      title: 'Creative Concept Moodboard 01',
       tagline: 'Visual inspiration, aesthetic direction, and thematic color harmony mood study.',
-      category: 'moonboard',
-      categoryLabel: 'Moonboard',
+      category: 'moodboard',
+      categoryLabel: 'Moodboard',
       badgeClass: 'bg-yellow',
       year: '2026',
       image: 'assets/images/MOODBOARD1.jpg',
@@ -436,12 +436,12 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: ['Canva', 'Ibis Paint', 'Figma']
     },
 
-    'moonboard-2': {
-      id: 'moonboard-2',
-      title: 'Graphic Identity Moonboard 02',
+    'moodboard-2': {
+      id: 'moodboard-2',
+      title: 'Graphic Identity Moodboard 02',
       tagline: 'Material exploration, typography specimens, and conceptual graphic layout board.',
-      category: 'moonboard',
-      categoryLabel: 'Moonboard',
+      category: 'moodboard',
+      categoryLabel: 'Moodboard',
       badgeClass: 'bg-blue',
       year: '2026',
       image: 'assets/images/MOODBOARD2.jpg',
@@ -464,12 +464,12 @@ document.addEventListener('DOMContentLoaded', () => {
       tools: ['Canva', 'Ibis Paint', 'Figma']
     },
 
-    'moonboard-3': {
-      id: 'moonboard-3',
-      title: 'Art Direction Moonboard 03',
+    'moodboard-3': {
+      id: 'moodboard-3',
+      title: 'Art Direction Moodboard 03',
       tagline: 'Digital illustration style references, atmospheric visual mood, and character studies.',
-      category: 'moonboard',
-      categoryLabel: 'Moonboard',
+      category: 'moodboard',
+      categoryLabel: 'Moodboard',
       badgeClass: 'bg-mint',
       year: '2026',
       image: 'assets/images/MOODBOARD3.jpg',
@@ -508,9 +508,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'movie-poster-2',
     'dp-frames-1',
     'dp-frames-2',
-    'moonboard-1',
-    'moonboard-2',
-    'moonboard-3'
+    'moodboard-1',
+    'moodboard-2',
+    'moodboard-3'
   ];
   let currentModalProjectId = 'illustration-branding-1';
 
@@ -590,58 +590,64 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. PROMOTIONAL VIDEO SCROLL REVEAL & SMOOTH SCROLL OBSERVER
+  // 4. PROMOTIONAL VIDEO SCROLL REVEAL & AUTOPLAY OBSERVER
   // --------------------------------------------------------------------------
   const promoVideoContainer = document.getElementById('promoVideoContainer');
   const promoVideoPlayer = document.getElementById('promoVideoPlayer');
-  const scrollDownToPromo = document.getElementById('scrollDownToPromo');
-  const heroWatchVideoBtn = document.getElementById('heroWatchVideoBtn');
 
-  function checkPromoInView() {
-    if (!promoVideoContainer) return;
-    const rect = promoVideoContainer.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    if (rect.top <= windowHeight * 0.88 && rect.bottom >= 0) {
-      promoVideoContainer.classList.add('in-view');
+  function handleVideoAutoplay(play) {
+    if (!promoVideoPlayer) return;
+    const activePage = sessionStorage.getItem('portfolio_active_section') || 'home';
+    if (activePage !== 'home') {
+      if (!promoVideoPlayer.paused) promoVideoPlayer.pause();
+      return;
+    }
+    if (play) {
+      const playPromise = promoVideoPlayer.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Browser autoplay restriction handled gracefully
+        });
+      }
+    } else {
+      if (!promoVideoPlayer.paused) {
+        promoVideoPlayer.pause();
+      }
     }
   }
 
-  if (promoVideoContainer) {
+  function checkPromoInView() {
+    if (!promoVideoContainer || !promoVideoPlayer) return;
+    const rect = promoVideoContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const inView = rect.top <= windowHeight * 0.75 && rect.bottom >= windowHeight * 0.20;
+    if (inView) {
+      promoVideoContainer.classList.add('in-view');
+      handleVideoAutoplay(true);
+    } else {
+      handleVideoAutoplay(false);
+    }
+  }
+
+  if (promoVideoContainer && promoVideoPlayer) {
     if ('IntersectionObserver' in window) {
       const promoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             promoVideoContainer.classList.add('in-view');
+            handleVideoAutoplay(true);
+          } else {
+            handleVideoAutoplay(false);
           }
         });
       }, {
-        threshold: 0.15,
+        threshold: 0.2,
         rootMargin: '0px 0px -40px 0px'
       });
       promoObserver.observe(promoVideoContainer);
     }
     window.addEventListener('scroll', checkPromoInView, { passive: true });
-    setTimeout(checkPromoInView, 350);
-  }
-
-  function scrollToPromoVideo(e) {
-    if (e && typeof e.preventDefault === 'function') e.preventDefault();
-    const promoSection = document.getElementById('promoVideo');
-    if (promoSection) {
-      promoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => {
-        if (promoVideoContainer) {
-          promoVideoContainer.classList.add('in-view');
-        }
-      }, 450);
-    }
-  }
-
-  if (scrollDownToPromo) {
-    scrollDownToPromo.addEventListener('click', scrollToPromoVideo);
-  }
-  if (heroWatchVideoBtn) {
-    heroWatchVideoBtn.addEventListener('click', scrollToPromoVideo);
+    setTimeout(checkPromoInView, 400);
   }
 
   // --------------------------------------------------------------------------
@@ -668,6 +674,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function showPage(pageId, updateHistory = true) {
     if (!sectionIds.includes(pageId)) {
       pageId = 'home';
+    }
+
+    // Automatically pause promo video when switching or navigating pages
+    if (promoVideoPlayer && typeof promoVideoPlayer.pause === 'function') {
+      promoVideoPlayer.pause();
     }
 
     // Hide all sections, display the active section
@@ -995,6 +1006,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openModal(projectId) {
+    if (promoVideoPlayer && typeof promoVideoPlayer.pause === 'function') {
+      promoVideoPlayer.pause();
+    }
     populateModal(projectId);
     projectModal.classList.add('open');
     projectModal.setAttribute('aria-hidden', 'false');

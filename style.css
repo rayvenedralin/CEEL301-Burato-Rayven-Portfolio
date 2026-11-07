@@ -855,9 +855,8 @@ h6 {
 
 /* Home Promotional Video Showcase (Reveals on Scroll) */
 .home-promo-section {
-  margin-top: 60px;
-  padding-top: 56px;
-  border-top: 3px dashed #1A1A1A;
+  margin-top: 48px;
+  padding-top: 20px;
 }
 
 .promo-header {
@@ -2694,12 +2693,12 @@ h6 {
 }
 
 /* --------------------------------------------------------------------------
-   17. SITE FOOTER (Sleek Minimal Neo-Brutalist Bar)
+   17. SITE FOOTER (Clean & Simple Line)
    -------------------------------------------------------------------------- */
 .site-footer {
-  background: #FFFFFF;
-  border-top: 3px solid #1A1A1A;
-  padding: 22px 0;
+  background: var(--pure-white);
+  border-top: 2px solid #1A1A1A;
+  padding: 24px 0;
   position: relative;
   z-index: 10;
   margin-top: 50px;
@@ -2708,80 +2707,44 @@ h6 {
 .footer-container-simple {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
+  justify-content: center;
+  text-align: center;
 }
 
-.footer-simple-brand {
+.footer-simple-line {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: #333333;
+  margin: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
-.logo-badge-caps-mini {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--yellow-sunshine);
-  border: 2.5px solid #1A1A1A;
-  border-radius: 8px;
-  padding: 4px 14px;
-  box-shadow: 2.5px 2.5px 0px #1A1A1A;
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 800;
+.footer-simple-line strong {
   color: #1A1A1A;
-  text-decoration: none;
-  transition: all var(--transition-bounce);
+  font-weight: 700;
 }
 
-.logo-badge-caps-mini:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px #1A1A1A;
+.footer-divider-dot {
+  color: #888888;
+  font-weight: bold;
 }
 
-.footer-tagline-simple {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.stamp-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--yellow-sunshine);
-  border: 2px solid #1A1A1A;
-  border-radius: 9999px;
-  padding: 5px 14px;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 800;
-  box-shadow: 2px 2px 0px #1A1A1A;
-  letter-spacing: 0.04em;
-}
-
-.stamp-pill .stamp-star {
-  font-size: 0.95rem;
-  line-height: 1;
-}
-
-.copyright-text {
-  font-size: 0.88rem;
-  color: var(--text-dark);
-  margin: 0;
+.footer-tagline-text {
+  color: #555555;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
-  .footer-container-simple {
+  .footer-simple-line {
     flex-direction: column;
-    text-align: center;
-    gap: 14px;
+    gap: 6px;
   }
-  .footer-simple-brand {
-    flex-direction: column;
+  .footer-divider-dot {
+    display: none;
   }
 }
 
