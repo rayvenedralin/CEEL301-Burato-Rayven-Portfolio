@@ -33,7 +33,7 @@
     href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=20261107_v6">
+  <link rel="stylesheet" href="style.css?v=20261107_v7">
 </head>
 
 <body>
@@ -223,11 +223,11 @@
         <div class="filter-bar" role="tablist" aria-label="Project Categories">
           <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
             <span>All Work</span>
-            <span class="filter-count" id="count-all">17</span>
+            <span class="filter-count" id="count-all">18</span>
           </button>
           <button type="button" class="filter-btn" data-filter="illustration-branding" role="tab" aria-selected="false">
             <span>Illustration/Branding</span>
-            <span class="filter-count" id="count-illustration-branding">2</span>
+            <span class="filter-count" id="count-illustration-branding">3</span>
           </button>
           <button type="button" class="filter-btn" data-filter="social-media" role="tab" aria-selected="false">
             <span>Social Media</span>
@@ -308,6 +308,33 @@
                 <span class="tag-pill">Logo Design</span>
                 <span class="tag-pill">Mecha Geometry</span>
                 <span class="tag-pill">Streetwear</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. ILLUSTRATION / BRANDING 3 -->
+          <article class="project-card" data-category="illustration-branding" data-id="illustration-branding-3">
+            <div class="card-media-wrapper">
+              <img src="assets/images/ILLUSTRATION BRANDING 3.jpg" alt="Rayven Signature Vector Emblem"
+                class="card-thumb-img" loading="lazy">
+              <span class="card-badge bg-yellow">Illustration / Branding</span>
+              <button type="button" class="quick-view-btn" aria-label="View Rayven Signature Vector Emblem details">
+                <span>View Project ↗</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="meta-tag">Identity &amp; Vector Mark</span>
+                <span class="meta-year">2025</span>
+              </div>
+              <h3 class="card-title">Rayven Signature Vector Emblem</h3>
+              <p class="card-desc">
+                High-contrast monochrome vector insignia and custom typographic emblem designed for brand identity systems.
+              </p>
+              <div class="card-tags">
+                <span class="tag-pill">Branding</span>
+                <span class="tag-pill">Vector Emblem</span>
+                <span class="tag-pill">Identity</span>
               </div>
             </div>
           </article>
@@ -1525,15 +1552,15 @@
   =============================================== -->
   <footer class="site-footer">
     <div class="container footer-container-simple">
-      <p class="footer-simple-line">
-        &copy; <span id="currentYear">2026</span> <strong>Rayven E. Burato</strong>. All Rights Reserved.
-        <span class="footer-divider-dot">•</span>
-        <span class="footer-tagline-text">Aspiring Graphic Artist • Brand Identity &amp; Digital Illustration</span>
-      </p>
+      <div class="footer-simple-line">
+        <span class="footer-copyright-text">&copy; <span id="currentYear">2026</span> <strong>Rayven E. Burato</strong>. All Rights Reserved.</span>
+        <span class="footer-divider-dot" aria-hidden="true">•</span>
+        <span class="footer-tagline-text">Aspiring Graphic Artist &bull; Brand Identity &amp; Digital Illustration</span>
+      </div>
     </div>
   </footer>
 
-  <script src="script.js?v=20261107_v6"></script>
+  <script src="script.js?v=20261107_v7"></script>
 </body>
 
 </html>

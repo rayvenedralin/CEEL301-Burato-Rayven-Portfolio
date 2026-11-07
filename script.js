@@ -36,6 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
       typography: ['Custom Monster Hand Lettering', 'Space Grotesk', 'Fredoka Bold'],
       tools: ['Canva', 'Ibis Paint']
     },
+    'illustration-branding-3': {
+      id: 'illustration-branding-3',
+      title: 'Rayven Signature Vector Emblem',
+      tagline: 'High-contrast monochrome vector insignia and custom typographic emblem designed for brand identity systems.',
+      category: 'illustration-branding',
+      categoryLabel: 'Illustration / Branding',
+      badgeClass: 'bg-yellow',
+      year: '2025',
+      image: 'assets/images/ILLUSTRATION BRANDING 3.jpg',
+      serviceValue: 'Brand Identity & Vector Illustration',
+      challenge: 'Develop a stark, high-contrast monochrome vector emblem and signature typography mark versatile across all print scales and apparel surfaces.',
+      solution: 'Engineered a sharp geometric vector insignia pairing bold black silhouette geometry with pure negative space, optimizing clarity across digital screens and physical stamps.',
+      deliverables: [
+        'Scalable Monochrome Vector Mark',
+        'Signature Geometric Emblem Assets',
+        'High-Res Export Files (SVG, PNG, PDF)',
+        'Print & Apparel Application Guidelines'
+      ],
+      swatches: [
+        { name: 'Monochrome Black', hex: '#000000' },
+        { name: 'Pure White', hex: '#FFFFFF' },
+        { name: 'Graphite Grey', hex: '#262626' },
+        { name: 'Silver Tone', hex: '#E5E5E5' }
+      ],
+      typography: ['Custom Geometric Sans', 'Space Grotesk Black', 'Inter'],
+      tools: ['Canva', 'Ibis Paint', 'Figma']
+    },
 
     'illustration-branding-2': {
       id: 'illustration-branding-2',
@@ -496,6 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectOrder = [
     'illustration-branding-1',
     'illustration-branding-2',
+    'illustration-branding-3',
     'social-media-1',
     'social-media-2',
     'social-media-3',

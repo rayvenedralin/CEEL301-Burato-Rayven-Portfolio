@@ -2698,7 +2698,7 @@ h6 {
 .site-footer {
   background: var(--pure-white);
   border-top: 2px solid #1A1A1A;
-  padding: 24px 0;
+  padding: 22px 0;
   position: relative;
   z-index: 10;
   margin-top: 50px;
@@ -2713,17 +2713,22 @@ h6 {
 
 .footer-simple-line {
   font-family: var(--font-body);
-  font-size: 0.92rem;
+  font-size: 0.90rem;
   color: #333333;
   margin: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-.footer-simple-line strong {
+.footer-copyright-text {
+  color: #333333;
+  display: inline;
+}
+
+.footer-copyright-text strong {
   color: #1A1A1A;
   font-weight: 700;
 }
@@ -2731,23 +2736,24 @@ h6 {
 .footer-divider-dot {
   color: #888888;
   font-weight: bold;
+  user-select: none;
 }
 
 .footer-tagline-text {
   color: #555555;
   font-weight: 500;
+  display: inline;
 }
 
 @media (max-width: 768px) {
   .footer-simple-line {
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .footer-divider-dot {
     display: none;
   }
 }
-
 /* --------------------------------------------------------------------------
    18. RESPONSIVE DESIGN (MEDIA QUERIES)
    -------------------------------------------------------------------------- */
